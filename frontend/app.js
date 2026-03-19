@@ -1,4 +1,21 @@
-const API_BASE = "http://localhost:5000/api";
+// Development API Base (Your Local Computer)
+let API_BASE = "http://localhost:5000/api";
+
+// Auto-detect Production Environment (GitHub Pages) and throw a helpful alert!
+if (window.location.hostname.includes("github.io")) {
+    // ⚠️ YOU MUST DEPLOY YOUR BACKEND TO RENDER.COM AND PASTE THE URL HERE:
+    API_BASE = "https://YOUR_PYTHON_SERVER.onrender.com/api"; 
+    
+    // Automatically warns the user on the live site!
+    window.addEventListener('DOMContentLoaded', () => {
+        const errorBox = document.getElementById('auth-message');
+        if (errorBox) {
+            errorBox.style.color = "var(--danger)";
+            errorBox.innerText = "🛑 IMPORTANT: To make login work on GitHub Pages, you must deploy your Python backend to Render.com and paste the live URL into frontend/app.js!";
+        }
+    });
+}
+
 let contextInterval = null;
 
 // Select DOM Elements
